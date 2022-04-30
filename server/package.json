@@ -1,0 +1,7 @@
+{
+  "name": "ide-auto-install",
+  "dependencies": {
+    "@tbmp/mp-cloud-node-sdk": "*",
+    "faas-mini-app": "*"
+  }
+}

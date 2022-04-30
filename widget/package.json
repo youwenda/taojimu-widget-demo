@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build-canal": "canal -i ./ -o ./__canal_dist__ -m canal -p"
+  },
+  "devDependencies": {
+    "@tbmp/mp-cloud-sdk": "*"
+  }
+}

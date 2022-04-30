@@ -1,0 +1,65 @@
+<view class="wrapper">
+
+  <text class="caption">每日趣答</text>
+
+  <view a:if="{{scene=='question'}}">
+    <view class="main">
+      <view class="apitest">
+        <text class="button" onTap="joinMember">加入会员</text>
+        <text class="button" onTap="favorShop">订阅店铺</text>
+        <text class="button" onTap="showSku">加购宝贝</text>
+        <text class="button" onTap="collectGoods">收藏宝贝</text>
+      </view>
+      <view class="overview">
+        <image a:if="{{overviewPic}}" class="image" mode="aspectFill" src="{{overviewPic}}" />
+        <view a:else class="image skeleton"></view>
+      </view>
+
+      <view class="center question"><text>{{question}}</text></view>
+
+      <view a:if="{{step=='complete'}}" class="complete-view">
+        <text class="t">正确答案</text>
+        <text class="rightchoice">{{rightChoice}}</text>
+      </view>
+
+      <view a:if="{{step=='choice'}}" class="choice">
+        <view a:for="{{choices}}" class="item" onTap="choice" data-value="{{item}}">
+          <text class="text">{{item}}</text>
+        </view>
+      </view>
+
+      <view a:if="{{step=='answer'}}" class="button" onTap="answer">
+        <text class="text">立即回答</text>
+      </view>
+    </view>
+    <view class="tips items"><text class="text">宝贝ID: {{itemId}}</text></view>
+    <view class="tips link"><text class="text">链接：{{link}}</text></view>
+  </view>
+
+  <view a:if="{{scene=='complete'}}">
+
+    <view a:if="{{result=='right'}}" class="complete">
+      <image mode="aspectFit" class="image" src="https://gw.alicdn.com/tfs/TB1QyucsxTpK1RjSZR0XXbEwXXa-400-400.jpg" />
+      <text class="complete-message">恭喜回答正确</text>
+      <view class="button" onTap="back"><text class="text">返回</text></view>
+    </view>
+
+    <view a:if="{{result=='error'}}" class="complete">
+      <image mode="aspectFit" class="image" src="https://gw.alicdn.com/tfs/TB1Y_F.szDpK1RjSZFrXXa78VXa-400-400.jpg" />
+
+      <!--还有机会-->
+
+      <view a:if="{{chance > 0}}" class="center">
+        <text class="complete-message">一首 凉凉 送给你~,</text>
+        <text class="complete-message">没关系，仔细想想答案，再来一次吧！</text>
+        <view class="button" onTap="retry"><text class="text">回答错误，重新回答</text></view>
+      </view>
+
+      <!--机会用完了-->
+      <view a:if="{{chance <= 0}}" class="center">
+        <text class="complete-message">非常抱歉，回答错误</text>
+        <view class="button" onTap="end"><text class="text">正确答案是什么？</text></view>
+      </view>
+    </view>
+  </view>
+</view>

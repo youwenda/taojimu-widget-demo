@@ -1,0 +1,5 @@
+{
+  "publicComponents": {
+    "api_test": "component/api_test/api_test"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "miniprogramRoot": "client",
+  "pluginRoot": "widget",
+  "compileType": "plugin",
+  "exclude": [
+    "server/**"
+  ]
+}

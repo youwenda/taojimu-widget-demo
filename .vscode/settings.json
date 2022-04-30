@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.axml": "html",
+    "*.acss": "css",
+    "*.sjs": "javascript"
+  }
+}
