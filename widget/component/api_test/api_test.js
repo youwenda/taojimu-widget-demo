@@ -45,14 +45,7 @@ Component({
       success: (res) => {
         console.log("getConfig的返回值", res);
 
-        if (!res.data) {
-          console.warn("getConfig获取数据失败", res);
-          return;
-        }
-
-        const webapp =
-          res.data.webapp ||
-          (res.data.data && (res.data.data.webapp || res.data.data));
+        const webapp = res && (res.webapp || res.data.webapp || res.data.data && (res.data.data.webapp || res.data.data));
 
         const { rightChoice, question, errorChoice, overviewPic, items, link } =
           webapp;
