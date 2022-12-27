@@ -1,0 +1,25 @@
+<view style="position: relative;">
+  <view class="api-wrapper">
+    <view class="btn" onTap="onGetSceneInfo">my.getSceneInfo</view>
+    <view class="btn" onTap="onGetSceneId">查看场景id</view>
+    <view class="btn" onTap="onGetPageUrl">查看页面pageUrl</view>
+    <view class="btn" onTap="onGetOrderId">查看重写orderId</view>
+    <view class="btn" onTap="onGetPageConf">查看页面pageConf-v2</view>
+    <view class="btn" onTap="onJoinMember">入会</view>
+    <view class="btn" onTap="onSaveStore">写入store</view>
+    <view class="btn" onTap="onOpenDetail">测试重写的openDetail</view>
+    <view class="btn" onTap="onDrawPrize">测试旺铺领取奖励</view>
+    <view class="btn" onTap="onNavigation">跳转淘积木相关的页面</view>
+    <view class="btn" onTap="onDrawCoupon">领取优惠券</view>
+    <view class="btn" onTap="onFavorMiniapp">关注频道</view>
+  </view>
+  <view class="result-wrapper">
+    <view class="result">itemDetail: {{itemDetail}}</view>
+  </view>
+  <view a:if="{{showToast && showToast.visible}}" class="toast">
+    <view class="toast-content">
+      <text class="toast-text">{{showToast.content}}</text>
+    </view>
+  </view>
+</view>
+
