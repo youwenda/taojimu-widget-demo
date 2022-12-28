@@ -1,0 +1,28 @@
+<view style="position: relative;">
+  <view class="api-wrapper">
+    <text class="btn" onTap="onGetSceneInfo">my.getSceneInfo</text>
+    <text class="btn" onTap="onGetConfigData">my.getConfigData</text>
+    <text class="btn" onTap="onGotoDocs">跳转淘积木互动官网文档</text>
+    <text class="btn" onTap="onShopFavor">订阅店铺</text>
+    <text class="btn" onTap="onGetItemDetail">查看商品详情</text>
+    <text class="btn" onTap="onOpenDetail">跳转商品详情</text>
+    <text class="btn" onTap="onJoinMember">入会</text>
+    <text class="btn" onTap="onDrawCoupon">领取优惠券</text>
+    <text class="btn" onTap="onDrawPrize">领取奖励</text>
+    <text class="btn" onTap="onGetLiveLevel">获取直播亲密等级</text>
+    <text class="btn" onTap="onGetTaskInfo">查询任务数据</text>
+    <text class="btn" onTap="onTaskAddBag">做任务：加购商品</text>
+    <text class="btn" onTap="onTaskAppointLive">做任务：观看直播</text>
+    <text class="btn" onTap="onTaskSubChance">游戏机会减一</text>
+  </view>
+  <!-- my.showToast polyfill -->
+  <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
+    <view class="mx-toast-bd">
+      <image a:if="{{showToast.type == 'success'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png" />
+      <image a:elif="{{showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png" />
+      <image a:elif="{{showToast.type == 'loading'}}" class="mx-toast-bd-icon" src="https://gw.alicdn.com/imgextra/i2/O1CN01cs80tS1y0NZJsTLjD_!!6000000006516-54-tps-200-200.apng" />
+      <text class="mx-toast-bd-content">{{showToast.content}}</text>
+    </view>
+  </view>
+</view>
+

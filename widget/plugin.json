@@ -1,5 +1,5 @@
 {
   "publicComponents": {
-    "api_test": "component/api_test/api_test"
+    "sdk-api": "component/index/index"
   }
 }

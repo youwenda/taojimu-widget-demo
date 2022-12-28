@@ -3,5 +3,9 @@
     "*.axml": "html",
     "*.acss": "css",
     "*.sjs": "javascript"
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#385ACC",
+    "titleBar.inactiveBackground": "#28449F"
   }
 }

@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "api_test" : "plugin://myPlugin/api_test"
+    "sdk-api" : "plugin://myPlugin/sdk-api"
   }
 }
