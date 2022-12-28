@@ -415,7 +415,7 @@ Component({
             //   },
             // };
             my.showToast({
-              content: `观看直播任务完成，您将获取${res.chance}次游戏机会，当前任务已经做了${res.task.count}次，当天的加购任务${res.task.isCompleted ? '已完成':'尚未完成'}`,
+              content: `观看直播任务完成，您将获取${res.chance}次游戏机会，当前任务已经做了${res.task.count}次，当天的观看直播任务${res.task.isCompleted ? '已完成':'尚未完成'}`,
               duration: 5e3
             });
           },
