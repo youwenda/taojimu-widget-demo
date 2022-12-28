@@ -1,24 +1,21 @@
 <view style="position: relative;">
   <view class="api-wrapper">
     <text class="btn" onTap="onGetSceneInfo">my.getSceneInfo</text>
-    <text class="btn" onTap="onGetConfigData">查看配置数据</text>
-    <text class="btn" onTap="onGetPageUrl">查看页面pageUrl</text>
-    <text class="btn" onTap="onGetOrderId">查看重写orderId</text>
-    <text class="btn" onTap="onGetPageConf">查看页面pageConf-v2</text>
+    <text class="btn" onTap="onGetConfigData">my.getConfigData</text>
+    <text class="btn" onTap="onGotoDocs">跳转淘积木互动官网文档</text>
+    <text class="btn" onTap="onShopFavor">订阅店铺</text>
+    <text class="btn" onTap="onGetItemDetail">查看商品详情</text>
+    <text class="btn" onTap="onOpenDetail">跳转商品详情</text>
     <text class="btn" onTap="onJoinMember">入会</text>
-    <text class="btn" onTap="onSaveStore">写入store</text>
-    <text class="btn" onTap="onOpenDetail">测试重写的openDetail</text>
-    <text class="btn" onTap="onDrawPrize">测试旺铺领取奖励</text>
-    <text class="btn" onTap="onNavigation">跳转淘积木相关的页面</text>
     <text class="btn" onTap="onDrawCoupon">领取优惠券</text>
-    <text class="btn" onTap="onFavorMiniapp">关注频道</text>
+    <text class="btn" onTap="onDrawPrize">领取奖励</text>
+    <text class="btn" onTap="onGetLiveLevel">获取直播亲密等级</text>
+    <text class="btn" onTap="onGetTaskInfo">查询任务数据</text>
+    <text class="btn" onTap="onShare">分享</text>
   </view>
-  <view class="result-wrapper">
-    <text class="result">temDetail: {{itemDetail}}</text>
-  </view>
-  
+  <!-- my.showToast polyfill -->
   <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
-    <view class="mx-toast-bd {{showToast.animationClass}}">
+    <view class="mx-toast-bd">
       <image a:if="{{showToast.type == 'success'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png" />
       <image a:elif="{{showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png" />
       <image a:elif="{{showToast.type == 'loading'}}" class="mx-toast-bd-icon" src="https://gw.alicdn.com/imgextra/i2/O1CN01cs80tS1y0NZJsTLjD_!!6000000006516-54-tps-200-200.apng" />

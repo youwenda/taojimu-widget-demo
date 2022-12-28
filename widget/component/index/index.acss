@@ -30,17 +30,6 @@
   margin-right: 20rpx;
   box-sizing: border-box;
 }
-.result-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  overflow: hidden;
-}
-.result {
-  padding-left: 20rpx;
-}
 
 .mx-toast {
   display: none;
@@ -49,7 +38,7 @@
   display: block;
 }
 .mx-toast-bd {
-  /* opacity: 0; */
+  opacity: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,6 +66,9 @@
   word-break: break-all;
   z-index: 2147483641;
 }
+.mx-toast-show .mx-toast-bd {
+  opacity: 1;
+}
 .mx-toast-bd-icon {
   width: 75rpx;
   height: 75rpx;
@@ -90,10 +82,11 @@
   color: #ffffff;
   font-family: pingfang sc, miui, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif, Microsoft YaHei, arial;
   display: inline-block;
-  max-width: 100%;
+  /* max-width: calc(100% - 60rpx); */
+  max-width: 540rpx;
   width: max-content;
 }
-.mx-toast-bd-show {
+/* .mx-toast-bd-show {
   opacity:1;
   -webkit-transform:translate3d(-50%,-50%,0) scale(1);
   transform:translate3d(-50%,-50%,0) scale(1);
@@ -110,32 +103,4 @@
   transform:translate3d(-50%,-50%,0) scale(1);
   -webkit-transition-duration:0s;
   transition-duration:0s;
-}
-
-.mx-loading-wrap {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  z-index: 2147483640;
-  left:0rpx;
-  top:0rpx;
-  width: 750rpx;
-  height: 850rpx;
-  background-color:rgba(255, 255, 255, 0);
-}
-.mx-loading{
-  width:150rpx;
-  height:150rpx;
-  border-radius: 20rpx;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content:center;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-.mx-loading .mx-loading-text{
- margin-top: 20rpx;
- color: #FFF !important;
-}
+} */
