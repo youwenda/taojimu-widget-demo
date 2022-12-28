@@ -19,17 +19,10 @@
   <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
     <view class="mx-toast-mask"></view>
     <view class="mx-toast-bd {{showToast.animationClass}}">
-      <div a:if="{{showToast.type == 'success' || showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-{{showToast.type}}"></div>
+      <image a:if="{{showToast.type == 'success'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png" />
+      <image a:elif="{{showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png" />
+      <image a:elif="{{showToast.type == 'loading'}}" class="mx-toast-bd-icon" src="https://gw.alicdn.com/imgextra/i2/O1CN01cs80tS1y0NZJsTLjD_!!6000000006516-54-tps-200-200.apng" />
       <text class="mx-toast-bd-content">{{showToast.content}}</text>
-    </view>
-  </view>
-
-  <view a:if="{{showLoading && showLoading.visible}}" class="mx-loading-wrap">
-    <view class="mx-loading">
-      <image style="width:30rpx; height:30rpx" mode="center" src="https://img.alicdn.com/imgextra/i1/O1CN01rlfTPh1fZfMRJHDUL_!!6000000004021-54-tps-30-30.apng" />
-      <view class="mx-loading-text" a:if="{{showLoading.content}}">
-        <text style="font-size: 24rpx; color:#FFFFFF">{{showLoading.content}}</text>
-      </view>
     </view>
   </view>
 </view>

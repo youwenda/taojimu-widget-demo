@@ -57,14 +57,14 @@
   bottom: 0;
 }
 .mx-toast-bd {
-  /* opacity: 0; */
+  opacity: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   background: rgba(51,51,51,0.90);
   box-sizing: border-box;
-  max-width: 500rpx;
+  max-width: 600rpx;
   color: #fff;
   padding: 30rpx;
   position: fixed;
@@ -73,8 +73,11 @@
   font-size: 30rpx;
   border-radius: 12rpx;
   text-align: center;
+  -webkit-transition-property: all;
   transition-property: all;
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
+  -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
   -webkit-transform:translate3d(-50%,-50%,0) scale(1);
   transform:translate3d(-50%,-50%,0) scale(1);
@@ -86,30 +89,36 @@
 .mx-toast-bd-icon {
   width: 75rpx;
   height: 75rpx;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 88%;
+}
+.mx-toast-bd-icon-margin {
   margin-top: 8rpx;
   margin-bottom: 16rpx;
-}
-.mx-toast-icon-success {
-  background-image: url("https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png");
-}
-.mx-toast-icon-fail {
-  background-image: url("https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png");
 }
 .mx-toast-bd-content {
   text-align: center;
   color: #ffffff;
+  font-family: pingfang sc, miui, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif, Microsoft YaHei, arial;
+  display: inline-block;
+  max-width: 100%;
+  width: max-content;
 }
 .mx-toast-bd-show {
-  opacity:1;-webkit-transform:translate3d(-50%,-50%,0) scale(1);transform:translate3d(-50%,-50%,0) scale(1);-webkit-transition-duration:0.4s;transition-duration:0.4s;
+  opacity:1;
+  -webkit-transform:translate3d(-50%,-50%,0) scale(1);
+  transform:translate3d(-50%,-50%,0) scale(1);
+  -webkit-transition-duration:0.4s;transition-duration:0.4s;
 }
 .mx-toast-bd-hide-v1 {
-  opacity:1;-webkit-transform:translate3d(-50%,-50%,0) scale(0.8);transform:translate3d(-50%,-50%,0) scale(0.8);
+  opacity:1;
+  -webkit-transform:translate3d(-50%,-50%,0) scale(0.8);
+  transform:translate3d(-50%,-50%,0) scale(0.8);
 }
 .mx-toast-bd-hide-v2 {
-  opacity:0;-webkit-transform:translate3d(-50%,-50%,0) scale(1);transform:translate3d(-50%,-50%,0) scale(1);-webkit-transition-duration:0s;transition-duration:0s;
+  opacity:0;
+  -webkit-transform:translate3d(-50%,-50%,0) scale(1);
+  transform:translate3d(-50%,-50%,0) scale(1);
+  -webkit-transition-duration:0s;
+  transition-duration:0s;
 }
 
 

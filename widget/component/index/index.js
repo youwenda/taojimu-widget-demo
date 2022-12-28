@@ -22,7 +22,9 @@ Component({
     console.log('onDidMount');
     this.onGetItemDetail();
     my.showToast({
-      content: 'my.showToast',
+      type: 'success',
+      content: '我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子',
+      duration: 0,
     });
   },
   didUnmount() {
