@@ -160,7 +160,7 @@ Component({
           ids: [itemId],
           success: res => {
             my.alert({
-              content: `宝贝${itemId}数据如下，各字段返回含义请参看文档：${JSON.stringify(res)}`
+              content: `宝贝${itemId}数据如下，各字段返回含义请参看API文档。${JSON.stringify(res)}`
             });
           },
           fail: res => {
