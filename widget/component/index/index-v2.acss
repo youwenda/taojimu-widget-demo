@@ -15,7 +15,6 @@
 .btn {
   width: 340rpx;
   height: 80rpx;
-  line-height: 80rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,75 +42,39 @@
 }
 
 .mx-toast {
-  display: none;
-}
-.mx-toast-show {
-  display: block;
-}
-.mx-toast-mask {
-  position: fixed;
+  position: absolute;
   z-index: 2147483641;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  left: 0rpx;
+  top: 0rpx;
+  right: 0rpx;
+  bottom: 0rpx;
+  /* width: 750rpx; */
+  /* height: 850rpx; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  padding: 0 100rpx;
+  background-color:rgba(255, 255, 255, 0);
 }
-.mx-toast-bd {
-  /* opacity: 0; */
+.mx-toast-content{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background: rgba(51,51,51,0.90);
+  background-color: rgba(51, 51, 51, 0.9);
   box-sizing: border-box;
   max-width: 500rpx;
   color: #fff;
   padding: 30rpx;
-  position: fixed;
-  left: 50%;
-  top: 45%;
   font-size: 30rpx;
   border-radius: 12rpx;
   text-align: center;
-  transition-property: all;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in-out;
-  -webkit-transform:translate3d(-50%,-50%,0) scale(1);
-  transform:translate3d(-50%,-50%,0) scale(1);
-  word-wrap: break-word;
-  word-break: break-all;
-  z-index: 2147483641;
-  
 }
-.mx-toast-bd-icon {
-  width: 75rpx;
-  height: 75rpx;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 88%;
-  margin-top: 8rpx;
-  margin-bottom: 16rpx;
-}
-.mx-toast-icon-success {
-  background-image: url("https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png");
-}
-.mx-toast-icon-fail {
-  background-image: url("https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png");
-}
-.mx-toast-bd-content {
+.mx-toast-text{
   text-align: center;
-  color: #ffffff;
+  color: #FFFFFF;
 }
-.mx-toast-bd-show {
-  opacity:1;-webkit-transform:translate3d(-50%,-50%,0) scale(1);transform:translate3d(-50%,-50%,0) scale(1);-webkit-transition-duration:0.4s;transition-duration:0.4s;
-}
-.mx-toast-bd-hide-v1 {
-  opacity:1;-webkit-transform:translate3d(-50%,-50%,0) scale(0.8);transform:translate3d(-50%,-50%,0) scale(0.8);
-}
-.mx-toast-bd-hide-v2 {
-  opacity:0;-webkit-transform:translate3d(-50%,-50%,0) scale(1);transform:translate3d(-50%,-50%,0) scale(1);-webkit-transition-duration:0s;transition-duration:0s;
-}
-
 
 
 

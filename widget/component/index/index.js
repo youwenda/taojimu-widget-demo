@@ -1,15 +1,15 @@
 import '@taojimu/widget-runtime';
-import polyfillToast from '../runtime/polyfillToast';
+import polyfillToast from '../util/polyfillToast';
 
 Component({
   mixins: [],
   data: {
-    sceneInfo: {},
-    store: JSON.stringify({}),
     itemDetail: '',
-
+    // toast
     showToast: {
       visible: false,
+      animationClass: '',
+      type: '',
       content: ''
     },
   },
@@ -20,17 +20,28 @@ Component({
   },
   didMount() {
     console.log('onDidMount');
-    this.onGetStore();
     this.onGetItemDetail();
+    my.showToast({
+      content: 'my.showToast',
+    });
+  },
+  didUnmount() {
+    this.willUnmount = 1;
   },
   methods: {
+    setDataPromise(...args) {
+      return new Promise((resolve) => {
+        if (this.willUnmount) {
+          return;
+        }
+        this.setData(...args, () => resolve());
+      });
+    },
     getSceneInfo() {
       return new Promise((resolve, reject) => {
         my.getSceneInfo({
           success: res => {
-            const { sceneInfo } = res;
             console.log('getSceneInfo', JSON.stringify(res));
-            this.setData({ sceneInfo: res });
             resolve(res);
           },
           fail: err => {
@@ -44,6 +55,7 @@ Component({
         my.tb.getConfigData({
           success: res => {
             console.log('getConfig的返回值', res);
+            // @note 非常重要，请注意数据的存取判断逻辑，如下的判断逻辑兼容线上、IDE、可视化编辑数据的存取方式，请务必按照如下方式进行存取。
             let webapp;
             if (!res) {
               return reject('getConfigData illegal');
@@ -80,6 +92,17 @@ Component({
           content: `fail: ${JSON.stringify(reason)}`
         });
       });
+    },
+    onGetConfigData() {
+      this.getConfigData()
+      .then(configData => {
+
+      })
+      .catch(reason => {
+        my.showToast({
+          content: `getconfigdata fail: ${JSON.stringify(reason)}`
+        });
+      })
     },
     onGetSceneId() {
       this.getSceneInfo().then(({sceneInfo}) => {

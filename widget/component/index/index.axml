@@ -1,24 +1,35 @@
 <view style="position: relative;">
   <view class="api-wrapper">
-    <view class="btn" onTap="onGetSceneInfo">my.getSceneInfo</view>
-    <view class="btn" onTap="onGetSceneId">查看场景id</view>
-    <view class="btn" onTap="onGetPageUrl">查看页面pageUrl</view>
-    <view class="btn" onTap="onGetOrderId">查看重写orderId</view>
-    <view class="btn" onTap="onGetPageConf">查看页面pageConf-v2</view>
-    <view class="btn" onTap="onJoinMember">入会</view>
-    <view class="btn" onTap="onSaveStore">写入store</view>
-    <view class="btn" onTap="onOpenDetail">测试重写的openDetail</view>
-    <view class="btn" onTap="onDrawPrize">测试旺铺领取奖励</view>
-    <view class="btn" onTap="onNavigation">跳转淘积木相关的页面</view>
-    <view class="btn" onTap="onDrawCoupon">领取优惠券</view>
-    <view class="btn" onTap="onFavorMiniapp">关注频道</view>
+    <text class="btn" onTap="onGetSceneInfo">my.getSceneInfo</text>
+    <text class="btn" onTap="onGetConfigData">查看配置数据</text>
+    <text class="btn" onTap="onGetPageUrl">查看页面pageUrl</text>
+    <text class="btn" onTap="onGetOrderId">查看重写orderId</text>
+    <text class="btn" onTap="onGetPageConf">查看页面pageConf-v2</text>
+    <text class="btn" onTap="onJoinMember">入会</text>
+    <text class="btn" onTap="onSaveStore">写入store</text>
+    <text class="btn" onTap="onOpenDetail">测试重写的openDetail</text>
+    <text class="btn" onTap="onDrawPrize">测试旺铺领取奖励</text>
+    <text class="btn" onTap="onNavigation">跳转淘积木相关的页面</text>
+    <text class="btn" onTap="onDrawCoupon">领取优惠券</text>
+    <text class="btn" onTap="onFavorMiniapp">关注频道</text>
   </view>
   <view class="result-wrapper">
-    <view class="result">itemDetail: {{itemDetail}}</view>
+    <text class="result">temDetail: {{itemDetail}}</text>
   </view>
-  <view a:if="{{showToast && showToast.visible}}" class="toast">
-    <view class="toast-content">
-      <text class="toast-text">{{showToast.content}}</text>
+  <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
+    <view class="mx-toast-mask"></view>
+    <view class="mx-toast-bd {{showToast.animationClass}}">
+      <div a:if="{{showToast.type == 'success' || showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-{{showToast.type}}"></div>
+      <text class="mx-toast-bd-content">{{showToast.content}}</text>
+    </view>
+  </view>
+
+  <view a:if="{{showLoading && showLoading.visible}}" class="mx-loading-wrap">
+    <view class="mx-loading">
+      <image style="width:30rpx; height:30rpx" mode="center" src="https://img.alicdn.com/imgextra/i1/O1CN01rlfTPh1fZfMRJHDUL_!!6000000004021-54-tps-30-30.apng" />
+      <view class="mx-loading-text" a:if="{{showLoading.content}}">
+        <text style="font-size: 24rpx; color:#FFFFFF">{{showLoading.content}}</text>
+      </view>
     </view>
   </view>
 </view>
