@@ -8,7 +8,6 @@ const Mock = {
 Component({
   mixins: [],
   data: {
-    itemDetail: '',
     // toast
     showToast: {
       visible: false,
