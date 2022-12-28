@@ -19,6 +19,7 @@ Component({
   onInit() {
     console.log('onInit');
     polyfillToast.bind(this)();
+    this.onSetEnv();
   },
   didMount() {
     console.log('onDidMount');
@@ -102,7 +103,7 @@ Component({
         my.showToast({
           content: `my.getConfigData fail: ${JSON.stringify(reason)}`
         });
-      })
+      });
     },
     onGotoDocs() {
       my.showToast({
@@ -168,21 +169,40 @@ Component({
             });
           }
         });
-      });
+      }).catch(reason => {
+        my.showToast({
+          content: `my.getConfigData fail: ${JSON.stringify(reason)}`
+        });
+      })
     },
     onOpenDetail() {
-      my.tb.openDetail({
-        itemId: '663452251907',
-        success: res => {
-          my.showToast({
-            content: '跳转成功'
-          });
-        },
-        fail: res => {
-          my.showToast({
-            content: `跳转失败, 原因是：${JSON.stringify(res)}`
+      this.getConfigData()
+      .then(configData => {
+        const { scenes } = configData;
+        const itemId = scenes && scenes.item && scenes.item.length && scenes.item[0];
+        if (!itemId) {
+          return my.showToast({
+            content: '配置应用中未设置商品数据'
           });
         }
+        my.tb.openDetail({
+          itemId,
+          success: res => {
+            my.showToast({
+              content: '跳转成功'
+            });
+          },
+          fail: res => {
+            my.showToast({
+              content: `跳转失败, 原因是：${JSON.stringify(res)}`
+            });
+          }
+        });
+      })
+      .catch(reason => {
+        my.showToast({
+          content: `my.getConfigData fail: ${JSON.stringify(reason)}`
+        });
       });
     },
     onJoinMember() {
@@ -289,52 +309,150 @@ Component({
         },
       });
     },
-    onGetTaskInfo() {
-
-    },
-    onShare() {
-      my.showSharePanel({
-        query: {
-          from: 'youwenda-share'
-        },
-        title: '0元预约抽好礼',
-        desc: '现在预约可抽取大礼哦',
-        imageUrl: 'https://gw.alicdn.com/imgextra/i3/O1CN01NZAiYq1IWhdR2feH3_!!6000000000901-0-tps-500-500.jpg_q75.jpg_.webp',
-        success: function (res) {
-          console.log('showSharePanel成功：', JSON.stringify(res));
-        },
-        fail: function (res) {
-          console.log('showSharePanel失败：', JSON.stringify(res));
-        }
-      });
-    },
-    onFavorMiniapp() {
+    onSetEnv() {
       this.getConfigData()
       .then(configData => {
         const { scenes } = configData;
         const task = scenes && scenes.task;
-        if (!task || !task.tasks || !Array.isArray(task.tasks) || !task.tasks.find(task => task.taskContent.type === 'favorMiniapp')) {
+        if (!task || !task.tasks || !Array.isArray(task.tasks) || !task.tasks.length) {
           my.showToast({
-            content: '未配置关注频道任务'
+            content: '未配置任务数据'
           });
           return;
         }
-        const { label, miniappId } = task.tasks.find(task => task.taskContent.type === 'favorMiniapp').taskContent;
-        my.tb.tjmTaskFavorMiniapp({ id: miniappId }).then(res => {
+        my.tb.tjmSetEnv({
+          tasks: task.map(({ taskContent }) => {
+            const { type, dailyLimit } = taskContent;
+            return {
+              taskName: type,
+              maxCount: dailyLimit
+            }
+          }),
+        });
+      })
+      .catch(() => {});
+    },
+    onGetTaskInfo() {
+      my.tb.tjmTaskQueryInfo({
+        success: (res) => {
           my.alert({
-            content: `关注频道${label}成功: ${JSON.stringify(res)}`
+            content: `任务详情：${JSON.stringify(res)}`
           });
-        }).catch(res => {
-          my.alert({
-            content: `关注频道${label}失败: ${JSON.stringify(res)}`
+        },
+        fail: (res) => {
+          // 异常原因
+          my.showToast({
+            content: `获取任务失败: ${res.error}`
+          })
+        },
+      });
+    },
+    onTaskAddBag() {
+      this.getConfigData()
+      .then(configData => {
+        const { scenes } = configData;
+        const task = scenes && scenes.task;
+        if (!task || !task.tasks || !Array.isArray(task.tasks) || !task.tasks.find(task => task.taskContent.type === 'addBag')) {
+          my.showToast({
+            content: '未配置加购宝贝任务'
           });
+          return;
+        }
+        const { items_addbag } = task.tasks.find(task => task.taskContent.type === 'addBag').taskContent;
+        my.tb.tjmTaskAddBag({
+          id: items_addbag[0],
+          success: (res) => {
+            // 返回结果 示例
+            // res = {
+            //   chance: 2, // 游戏机会
+            //   task: {
+            //     taskName: 'addBag',
+            //     count: 2, // 任务已经做了2次，
+            //     isCompleted: true | false, // 当天的任务是否已经完成
+            //   },
+            // };
+            my.showToast({
+              content: `加购任务完成，您将获取${res.chance}次游戏机会，当前加购任务已经做了${res.task.count}次，当天的加购任务${res.task.isCompleted ? '已完成':'尚未完成'}`,
+              duration: 5e3
+            });
+          },
+          fail: (res) => {
+            // 异常原因
+            my.showToast({
+              content: `加购任务失败了，原因是：${res.error}`,
+            });
+          },
         });
       })
       .catch(reason => {
         my.showToast({
-          content: `fail: ${JSON.stringify(reason)}`
+          content: `my.getConfigData fail: ${JSON.stringify(reason)}`
+        });
+      });
+    },
+    onTaskAppointLive() {
+      this.getConfigData()
+      .then(configData => {
+        const { scenes } = configData;
+        const task = scenes && scenes.task;
+        if (!task || !task.tasks || !Array.isArray(task.tasks) || !task.tasks.find(task => task.taskContent.type === 'appointLive')) {
+          my.showToast({
+            content: '未配置观看直播任务'
+          });
+          return;
+        }
+        const { feedId } = task.tasks.find(task => task.taskContent.type === 'appointLive').taskContent;
+        my.tb.tjmTaskAppointLive({
+          feedId: feedId,
+          duration: 10,
+          success: (res) => {
+            // 返回结果 示例
+            // res = {
+            //   chance: 2, // 游戏机会
+            //   task: {
+            //     taskName: 'appointLive',
+            //     count: 2, // 任务已经做了2次，
+            //     isCompleted: true | false, // 当天的任务是否已经完成
+            //   },
+            // };
+            my.showToast({
+              content: `观看直播任务完成，您将获取${res.chance}次游戏机会，当前任务已经做了${res.task.count}次，当天的加购任务${res.task.isCompleted ? '已完成':'尚未完成'}`,
+              duration: 5e3
+            });
+          },
+          fail: (res) => {
+            // 异常原因
+            my.showToast({
+              content: `观看直播任务失败了，原因是：${res.error}`,
+            });
+          },
         });
       })
-    }
+      .catch(reason => {
+        my.showToast({
+          content: `my.getConfigData fail: ${JSON.stringify(reason)}`
+        });
+      });
+    },
+    onTaskSubChance() {
+      my.tb.tjmTaskSubChance({
+        success: (res) => {
+          // 示例，返回剩余的游戏机会
+          // res = {
+          //   'chance': 2,
+          // };
+          my.showToast({
+            content: `游戏机会已经减一，还剩${res.chance}次机会`
+          });
+        },
+        fail: (res) => {
+          // 异常原因
+          my.showToast({
+            content: `失败了：${res.error}`
+          });
+        },
+      });
+
+    },
   }
 });

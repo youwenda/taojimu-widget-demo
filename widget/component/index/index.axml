@@ -11,7 +11,9 @@
     <text class="btn" onTap="onDrawPrize">领取奖励</text>
     <text class="btn" onTap="onGetLiveLevel">获取直播亲密等级</text>
     <text class="btn" onTap="onGetTaskInfo">查询任务数据</text>
-    <text class="btn" onTap="onShare">分享</text>
+    <text class="btn" onTap="onTaskAddBag">做任务：加购商品</text>
+    <text class="btn" onTap="onTaskAppointLive">做任务：观看直播</text>
+    <text class="btn" onTap="onTaskSubChance">游戏机会减一</text>
   </view>
   <!-- my.showToast polyfill -->
   <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
