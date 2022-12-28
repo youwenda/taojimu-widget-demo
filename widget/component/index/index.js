@@ -19,7 +19,7 @@ Component({
   onInit() {
     console.log('onInit');
     polyfillToast.bind(this)();
-    this.onSetEnv();
+    this.registerTaskEnv();
   },
   didMount() {
     console.log('onDidMount');
@@ -309,7 +309,7 @@ Component({
         },
       });
     },
-    onSetEnv() {
+    registerTaskEnv() {
       this.getConfigData()
       .then(configData => {
         const { scenes } = configData;
@@ -321,10 +321,9 @@ Component({
           return;
         }
         my.tb.tjmSetEnv({
-          tasks: task.map(({ taskContent }) => {
-            const { type, dailyLimit } = taskContent;
+          tasks: task.tasks.map(({ taskContent, dailyLimit }) => {
             return {
-              taskName: type,
+              taskName: taskContent.type,
               maxCount: dailyLimit
             }
           }),
