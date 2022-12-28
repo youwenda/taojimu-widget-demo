@@ -13,10 +13,19 @@ export default function polyfillToast() {
     //         content
     //       }
     //     }, () => {
-    //       success.call(null);
-    //       complete.call(null);
+    //       const callback = () => {
+    //         try {
+    //           if (isFunction(success)) {
+    //             success();
+    //           }
+    //           if (isFunction(complete)) {
+    //             complete();
+    //           }
+    //         } catch(ex) {}
+    //         resolve();
+    //       };
     //       if (duration > 0) {
-    //         setTimeout(() => {
+    //         delay(duration).then(() => {
     //           this.setData({
     //             showToast: {
     //               visible: false,
@@ -24,10 +33,12 @@ export default function polyfillToast() {
     //               content: ''
     //             }
     //           }, () => {
-    //             resolve();
+    //             callback();
     //           });
-    //         }, duration);
+    //         });
+    //         return;
     //       }
+    //       callback();
     //     });
     //   });
     // });
@@ -80,54 +91,53 @@ export default function polyfillToast() {
     });
   };
 
-  let loadingQueue = [];
-  let loadingPromise = Promise.resolve();
-  my.showLoading = (params = {}) => {
-    loadingQueue.push(params);
-    loadingPromise = loadingPromise.then(() => {
-      return new Promise((resolve, reject) => {
-        const item = loadingQueue.shift();
-        if (item) {
-          const { content, delay = 0, success = noop, fail = noop, complete = noop } = item;
-          try {
-            this.setData({
-              showLoading: {
-                visible: true,
-                content
-              }
-            }, () => {
-              success.call(null);
-              complete.call(null);
-              if (delay > 0) {
-                setTimeout(() => {
-                  this.setData({
-                    showLoading: {
-                      visible: false,
-                      content: ''
-                    }
-                  }, () => {
-                    resolve();
-                  });
-                }, delay);
-              }
-            });
-          } catch(e) {
-            fail.call(null, e);
-            complete.call(null);
-            reject(e);
+  my.showLoading = ({ content = '', delay = 0, success = noop, fail = noop, complete = noop } = { content: '' }) => {
+    console.log('my.showLoading', typeof content, content);
+    promise = promise.then(() => {
+      return new Promise((resolve) => {
+        this.setData({
+          showToast: {
+            visible: true,
+            type: 'loading',
+            content
           }
-        } else {
-          resolve();
-        }
+        }, () => {
+          const callback = () => {
+            try {
+              if (isFunction(success)) {
+                success();
+              }
+              if (isFunction(complete)) {
+                complete();
+              }
+            } catch(ex) {}
+            resolve();
+          };
+          if (delay > 0) {
+            delay(delay).then(() => {
+              this.setData({
+                showToast: {
+                  visible: false,
+                  type: '',
+                  content: ''
+                }
+              }, () => {
+                callback();
+              });
+            });
+            return;
+          }
+          callback();
+        });
       });
     });
   };
   my.hideLoading = () => {
-    loadingPromise = Promise.resolve();
-    loadingQueue.length = 0;
+    promise = Promise.resolve();
     this.setData({
       showLoading: {
         visible: false,
+        type: '',
         content: ''
       }
     })

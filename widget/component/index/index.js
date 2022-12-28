@@ -24,7 +24,15 @@ Component({
     my.showToast({
       type: 'success',
       content: '我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子我是好孩子',
-      duration: 0,
+      success() {
+        my.showToast({
+          type: 'fail',
+          content: '拉拉',
+          success() {
+            my.showLoading()
+          }
+        })
+      }
     });
   },
   didUnmount() {

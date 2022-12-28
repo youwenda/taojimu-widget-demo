@@ -48,16 +48,8 @@
 .mx-toast-show {
   display: block;
 }
-.mx-toast-mask {
-  position: fixed;
-  z-index: 2147483641;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
 .mx-toast-bd {
-  opacity: 0;
+  /* opacity: 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,12 +71,11 @@
   transition-duration: 0.4s;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
-  -webkit-transform:translate3d(-50%,-50%,0) scale(1);
-  transform:translate3d(-50%,-50%,0) scale(1);
+  -webkit-transform: translate3d(-50%,-50%,0) scale(1);
+  transform: translate3d(-50%,-50%,0) scale(1);
   word-wrap: break-word;
   word-break: break-all;
   z-index: 2147483641;
-  
 }
 .mx-toast-bd-icon {
   width: 75rpx;
@@ -120,9 +111,6 @@
   -webkit-transition-duration:0s;
   transition-duration:0s;
 }
-
-
-
 
 .mx-loading-wrap {
   position: absolute;

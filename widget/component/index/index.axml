@@ -16,8 +16,8 @@
   <view class="result-wrapper">
     <text class="result">temDetail: {{itemDetail}}</text>
   </view>
+  
   <view class="mx-toast {{showToast && showToast.visible ? 'mx-toast-show' : ''}}">
-    <view class="mx-toast-mask"></view>
     <view class="mx-toast-bd {{showToast.animationClass}}">
       <image a:if="{{showToast.type == 'success'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1hhNCJa61gK0jSZFlXXXDKFXa-200-200.png" />
       <image a:elif="{{showToast.type == 'fail'}}" class="mx-toast-bd-icon mx-toast-bd-icon-margin" src="https://gw.alicdn.com/tfs/TB1zKb6XQ9l0K4jSZFKXXXFjpXa-200-200.png" />
