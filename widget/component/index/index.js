@@ -17,7 +17,7 @@ Component({
   },
   onInit() {
     console.log('onInit');
-    polyfillToast.bind(this)();
+    polyfillToast.call(this);
     this.registerTaskEnv();
   },
   didMount() {
@@ -66,8 +66,7 @@ Component({
               return reject('getConfigData illegal');
             }
             // 如何判断是否在可视化编辑模式下。
-            // 注意要判断TJM 这个对象是否存在，开发环境不存在这个变量。
-            const isIDE = webapp.TJM && webapp.TJM.isIDE;
+            const isIDE = my.isIDE;
             resolve(webapp);
           },
           fail: err => {

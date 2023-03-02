@@ -42,7 +42,6 @@ export default function polyfillToast() {
                   content: ''
                 }
               }, () => {
-                console.log('trigger callback');
                 callback();
               });
             });
@@ -70,7 +69,7 @@ export default function polyfillToast() {
       }
     });
   };
-  my.showLoading = ({ content = '', delay = 0, success = noop, fail = noop, complete = noop } = { content: '' }) => {
+  my.showLoading = ({ content = '', delay = 2e3, success = noop, fail = noop, complete = noop } = { content: '' }) => {
     promise = promise.then(() => {
       return new Promise((resolve) => {
         this.setData({
