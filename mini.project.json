@@ -2,6 +2,7 @@
   "miniprogramRoot": "client",
   "pluginRoot": "widget",
   "compileType": "plugin",
+  "widgetRuntimeVersion": "3.0-vue",
   "exclude": [
     "server/**"
   ]
