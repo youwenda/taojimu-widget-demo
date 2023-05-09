@@ -38,8 +38,9 @@ exports.schemaInit = async function (context) {
             template_id: templateAppId,
             template_version: templateAppVersion,
           },
-          session: authToken,
+          // session: authToken,
         },
+        autoSession: true,
       })
       .then(async (res) => {
         let updateResult = res.result;
@@ -96,8 +97,9 @@ exports.schemaInit = async function (context) {
             template_id: templateAppId,
             template_version: templateAppVersion,
           },
-          session: authToken,
+          // session: authToken,
         },
+        autoSession: true,
       })
       .then(async (res) => {
         console.log("instantiate.then", res);
