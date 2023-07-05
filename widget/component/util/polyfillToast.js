@@ -1,6 +1,6 @@
 const noop = () => {};
 const isFunction = (fn) => typeof fn === 'function';
-const delay = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
+const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
 /**
  * 模拟小程序中很实用的 my.showToast | my.hideToast | my.showLoading | my.hideLoading 功能
  * API 参照文档 予以尽可能实现
@@ -34,7 +34,7 @@ export default function polyfillToast() {
             resolve();
           };
           if (duration > 0) {
-            delay(duration).then(() => {
+            sleep(duration).then(() => {
               this.setData({
                 showToast: {
                   visible: false,
@@ -91,7 +91,7 @@ export default function polyfillToast() {
             resolve();
           };
           if (delay > 0) {
-            delay(delay).then(() => {
+            sleep(delay).then(() => {
               this.setData({
                 showToast: {
                   visible: false,
