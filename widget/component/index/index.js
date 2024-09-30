@@ -44,29 +44,11 @@ Component({
     getConfigData() {
       return new Promise((resolve, reject) => {
         my.showLoading();
-        my.tb.getConfigData({
+        // 此 API 兼容 IDE/真机调试/线上环境返回的数据结构的差异。(使用时请确保小部件运行时 @taojimu/widget-runtime 在1.0.10版本及以上才会有此新方法)
+        my.tb.tjmGetConfigData({
           success: res => {
             console.log('getConfig的返回值', res);
-            // @note 非常重要，请注意数据的存取判断逻辑，如下的判断逻辑兼容线上、IDE、可视化编辑数据的存取方式，请务必按照如下方式进行存取。
-            let webapp;
-            if (!res) {
-              return reject('getConfigData illegal');
-            }
-            webapp = res.webapp;
-            if (!webapp) {
-              webapp = res.data && res.data.webapp;
-            }
-            if (!webapp) {
-              webapp = res.data && res.data.data && res.data.data.webapp;
-            }
-            if (!webapp) {
-              webapp = res.data && res.data.data;
-            }
-            if (!webapp) {
-              return reject('getConfigData illegal');
-            }
-            // 如何判断是否在可视化编辑模式下。
-            const isIDE = my.isIDE;
+            let { webapp } = res;
             resolve(webapp);
           },
           fail: err => {
